@@ -7,9 +7,12 @@ angular.module('groceryListApp', ["ngRoute"])
     $scope.appTitle = "Grocery List";
 }])
 
-.controller("GroceryListItemsController", ["$scope","$routeParams", function($scope,$routeParams){
 
-    $scope.groceryItems = [
+.service('GroceryService', [function () {
+
+    var grocery_service = [];
+
+    grocery_service.grocery_items = [
         {completed: true, itemName: 'milk', date: '2014-10-01'},
         {completed: true, itemName: 'cookies', date: '2014-10-01'},
         {completed: true, itemName: 'ice cream', date: '2014-10-02'},
@@ -18,10 +21,18 @@ angular.module('groceryListApp', ["ngRoute"])
         {completed: true, itemName: 'bread', date: '2014-10-03'},
         {completed: true, itemName: 'eggs', date: '2014-10-04'},
         {completed: true, itemName: 'tortillas', date: '2014-10-04'}
-    ]
+    ];
+
+    return grocery_service;
+    
+}])
+
+.controller("GroceryListItemsController", ["$scope","$routeParams","GroceryService", function($scope,$routeParams,GroceryService){
+
+    $scope.groceryItems = GroceryService.grocery_items;
 
     $scope.rp = $routeParams.id;
-    
+
 
 }])
 
