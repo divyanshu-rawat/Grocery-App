@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html >
+<html ng-app="groceryListApp">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <!-- Latest compiled and minified CSS -->
@@ -20,55 +20,25 @@
 	</style>
 
 <body >
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse" ng-controller="HomeController">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">
                 <span class="glyphicon glyphicon-apple" style="color:#5bdb48">
                 </span>
-                Grocery List
+               {{appTitle}}
             </a>
         </div>
     </div>
 </nav>
 
-<div class="container">
-    <div class="col-xs-12">
-        <ul class="list-group">
-            <li class="list-group-item text-center clearfix">
-                <button type="button" class="btn btn-sm btn-success pull-left">
-                    <span class="glyphicon glyphicon-unchecked"></span>
-                </button>
-                <span style="font-weight:bold">Item 1</span>
-                <button type="button" class="btn btn-sm btn-default pull-right">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-            </li>
-            <li class="list-group-item text-center clearfix">
-                <button type="button" class="btn btn-sm btn-success pull-left">
-                    <span class="glyphicon glyphicon-unchecked"></span>
-                </button>
-                <span style="font-weight:bold">Item 2</span>
-                <button type="button" class="btn btn-sm btn-default pull-right">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-            </li>
-            <li class="list-group-item text-center clearfix">
-                <button type="button" class="btn btn-sm btn-success pull-left">
-                    <span class="glyphicon glyphicon-unchecked"></span>
-                </button>
-                <span style="font-weight:bold">Item 3</span>
-                <button type="button" class="btn btn-sm btn-default pull-right">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-            </li>
-        </ul>
-    </div>
-</div>
+<div ng-view class="container"></div>
 
 </body>
 
 	<script type="text/javascript" src = "js/app.js"></script>
+	<script type="text/javascript" src = "js/angular-route.min.js"></script>
+	<script type="text/javascript" src = "controllers/app.js"></script>
 
 <!-- <script type="text/javascript" src = "controllers/tutorialCtrl.js"></script> -->
 </html>
