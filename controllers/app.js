@@ -7,7 +7,7 @@ angular.module('groceryListApp', ["ngRoute"])
     $scope.appTitle = "Grocery List";
 }])
 
-.controller("GroceryListItemsController", ["$scope", function($scope){
+.controller("GroceryListItemsController", ["$scope","$routeParams", function($scope,$routeParams){
 
     $scope.groceryItems = [
         {completed: true, itemName: 'milk', date: '2014-10-01'},
@@ -19,6 +19,9 @@ angular.module('groceryListApp', ["ngRoute"])
         {completed: true, itemName: 'eggs', date: '2014-10-04'},
         {completed: true, itemName: 'tortillas', date: '2014-10-04'}
     ]
+
+    $scope.rp = $routeParams.id;
+    
 
 }])
 
@@ -34,5 +37,10 @@ angular.module('groceryListApp', ["ngRoute"])
         templateUrl: 'views/addingitem.html',
         controller: 'GroceryListItemsController'
     })
+    .when('/addItem/:id', {
+        templateUrl: 'views/addingitem.html',
+        controller: 'GroceryListItemsController'
+    })
+    .otherwise({ redirectTo: '/' })
 
 })
