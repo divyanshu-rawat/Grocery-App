@@ -30,9 +30,9 @@ angular.module('groceryListApp', ["ngRoute"])
         templateUrl: 'views/groceryList.html',
         controller: 'GroceryListItemsController'
     })
-    .when('/addingitem', {
-        templateUrl: 'addingitem.html',
-        controller: 'Input_Item.HtmlCtrl'
+    .when('/addItem', {
+        templateUrl: 'views/addingitem.html',
+        controller: 'GroceryListItemsController'
     })
 
 })
