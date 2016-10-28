@@ -3,6 +3,11 @@
  */
 angular.module('groceryListApp', ["ngRoute"])
 
+
+.constant('_',
+    window._
+)
+
 .controller("HomeController", ["$scope", function($scope) {
     $scope.appTitle = "Grocery List";
 }])
@@ -24,14 +29,24 @@ angular.module('groceryListApp', ["ngRoute"])
     ];
 
     grocery_service.save = function (entry) {
+
+        entry.id = grocery_service.generate_id();
         grocery_service.grocery_items.push(entry);
+    }
+
+    grocery_service.generate_id = function () {
+
+            var maxId = _.max(grocery_service.grocery_items,function (entry) { return entry.id }) ;
+            maxId.id = maxId.id + 1;
+            return maxId.id;
+
     }
 
     return grocery_service;
     
 }])
 
-.controller("GroceryListItemsController", ["$scope","$routeParams","$location","GroceryService", function($scope,$routeParams,$location,GroceryService){
+.controller("GroceryListItemsController", ["$scope","$routeParams","$location","GroceryService",function($scope,$routeParams,$location,GroceryService){
 
     $scope.groceryItems = GroceryService.grocery_items;
 
@@ -39,10 +54,13 @@ angular.module('groceryListApp', ["ngRoute"])
 
     $scope.save = function () {
 
+
         GroceryService.save($scope.groceryItem);
         $location.path("/")
     }
 
+   
+     // console.log(grocery_service.generate_id);
 
 }])
 
