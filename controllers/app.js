@@ -13,6 +13,14 @@ angular.module('groceryListApp', ["ngRoute"])
 
     $scope.groceryItems = GroceryService.grocery_items;
 
+       $scope.removeItem = function (entry) {
+        console.log(entry);
+
+        GroceryService.remove_item(entry);
+
+
+    }
+
 
 }])
 
@@ -83,6 +91,12 @@ angular.module('groceryListApp', ["ngRoute"])
         }
     }
 
+    grocery_service.remove_item = function (entry) {
+     
+      var index =  grocery_service.grocery_items.indexOf(entry);
+
+      grocery_service.grocery_items.splice(index,1);
+    }
 
     return grocery_service;
     
@@ -113,6 +127,7 @@ angular.module('groceryListApp', ["ngRoute"])
 
     }
 
+ 
       
      // console.log(grocery_service.generate_id);
 
