@@ -8,8 +8,12 @@ angular.module('groceryListApp', ["ngRoute"])
     window._
 )
 
-.controller("HomeController", ["$scope", function($scope) {
+.controller("HomeController", ["$scope","GroceryService", function($scope,GroceryService) {
     $scope.appTitle = "Grocery List";
+
+    $scope.groceryItems = GroceryService.grocery_items;
+
+
 }])
 
 
@@ -68,32 +72,48 @@ angular.module('groceryListApp', ["ngRoute"])
         return false;
     }
 
+    grocery_service.edit = function (id_,item) {
+        
+      for(key in grocery_service.grocery_items)
+        {
+            if(grocery_service.grocery_items[key].id == id_)
+            {
+                grocery_service.grocery_items[key].itemName = item;
+            }
+        }
+    }
+
 
     return grocery_service;
     
 }])
 
-.controller("GroceryListItemsController", ["$scope","$routeParams","$location","GroceryService",function($scope,$routeParams,$location,GroceryService){
+.controller("GroceryListItemController", ["$scope","$routeParams","$location","GroceryService",function($scope,$routeParams,$location,GroceryService){
 
-    $scope.groceryItems = GroceryService.grocery_items;
-
-    $scope.groceryItem = { id: 7 ,completed: true, itemName: 'cheese', date: '2014-10-04'};
-
+  
+    $scope.groceryItem = { id: 0 ,completed: true, itemName: '', date: new Date()};
     $scope.save = function () {
 
-        if( GroceryService.check_if_exist($scope.groceryItem.itemName))
+        if($routeParams.id)
         {
-            console.log('Already exists !');
-        }
+             console.log($routeParams.id);
+
+             GroceryService.edit($routeParams.id,$scope.groceryItem.itemName);
+        } 
         else
         {
-             GroceryService.save($scope.groceryItem);   
+            if( GroceryService.check_if_exist($scope.groceryItem.itemName) == false)
+            {
+                   GroceryService.save($scope.groceryItem); 
+            }
+
         }
-       
-        $location.path("/")
+
+         $location.path("/")
+
     }
 
-   
+      
      // console.log(grocery_service.generate_id);
 
 }])
@@ -104,15 +124,15 @@ angular.module('groceryListApp', ["ngRoute"])
 
     .when('/', {
         templateUrl: 'views/groceryList.html',
-        controller: 'GroceryListItemsController'
+        controller: 'HomeController'
     })
     .when('/addItem', {
         templateUrl: 'views/addingitem.html',
-        controller: 'GroceryListItemsController'
+        controller: 'GroceryListItemController'
     })
     .when('/addItem/edit/:id', {
         templateUrl: 'views/addingitem.html',
-        controller: 'GroceryListItemsController'
+        controller: 'GroceryListItemController'
     })
     .otherwise({ redirectTo: '/' })
 
