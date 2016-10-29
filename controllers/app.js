@@ -53,6 +53,21 @@ angular.module('groceryListApp', ["ngRoute"])
         }
     }
 
+    grocery_service.check_if_exist = function (item) {
+        
+      for(key in grocery_service.grocery_items)
+        {
+            if(grocery_service.grocery_items[key].itemName == item)
+            {
+                return true;
+            }
+
+            // console.log(item,grocery_service.grocery_items[key].itemName);
+        }
+
+        return false;
+    }
+
 
     return grocery_service;
     
@@ -66,8 +81,15 @@ angular.module('groceryListApp', ["ngRoute"])
 
     $scope.save = function () {
 
-
-        GroceryService.save($scope.groceryItem);
+        if( GroceryService.check_if_exist($scope.groceryItem.itemName))
+        {
+            swal('Already exists !');
+        }
+        else
+        {
+             GroceryService.save($scope.groceryItem);   
+        }
+       
         $location.path("/")
     }
 
