@@ -42,6 +42,18 @@ angular.module('groceryListApp', ["ngRoute"])
 
     }
 
+    grocery_service.find_by_id = function (id) {
+        
+        for(key in grocery_service.grocery_items)
+        {
+            if(grocery_service.grocery_items[key].id == id)
+            {
+                return grocery_service.grocery_items[key];
+            }
+        }
+    }
+
+
     return grocery_service;
     
 }])
@@ -76,7 +88,7 @@ angular.module('groceryListApp', ["ngRoute"])
         templateUrl: 'views/addingitem.html',
         controller: 'GroceryListItemsController'
     })
-    .when('/addItem/:id', {
+    .when('/addItem/edit/:id', {
         templateUrl: 'views/addingitem.html',
         controller: 'GroceryListItemsController'
     })
