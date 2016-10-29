@@ -22,6 +22,12 @@ angular.module('groceryListApp', ["ngRoute"])
     }
 
 
+    $scope.markCompleted = function (entry) {
+
+        GroceryService.mark_completed(entry);
+    }
+
+
 }])
 
 
@@ -97,6 +103,23 @@ angular.module('groceryListApp', ["ngRoute"])
 
       grocery_service.grocery_items.splice(index,1);
     }
+
+    grocery_service.mark_completed = function (entry) {
+     
+      var index =  grocery_service.grocery_items.indexOf(entry);
+
+      if( grocery_service.grocery_items[index].completed == true)
+      {
+             grocery_service.grocery_items[index].completed = false;
+      }
+      else
+      {
+             grocery_service.grocery_items[index].completed = true;
+      }
+     
+    }
+
+
 
     return grocery_service;
     
