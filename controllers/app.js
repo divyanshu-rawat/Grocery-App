@@ -83,7 +83,7 @@ angular.module('groceryListApp', ["ngRoute"])
 
         if( GroceryService.check_if_exist($scope.groceryItem.itemName))
         {
-            swal('Already exists !');
+            console.log('Already exists !');
         }
         else
         {
