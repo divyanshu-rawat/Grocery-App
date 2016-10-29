@@ -152,3 +152,11 @@ angular.module('groceryListApp', ["ngRoute"])
     .otherwise({ redirectTo: '/' })
 
 })
+
+
+.directive("tbgroceryitem", function(){
+    return{
+        restrict: "E",
+        templateUrl: "views/groceryItem.html"
+    }
+});
