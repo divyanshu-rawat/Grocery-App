@@ -1,5 +1,6 @@
 > Implemented :shaved_ice: leveraging almost all features of Angular !! :poultry_leg: :tropical_drink:
 
+* A very basic todo app I made messing around with angular JS.
 
 ### Installation Instructions :grey_exclamation:
 
