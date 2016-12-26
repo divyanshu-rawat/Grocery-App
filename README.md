@@ -8,7 +8,11 @@
 
 * cd into that root folder you just cloned locally.
 
-* Run local server I prefer running (python -m SimpleHTTPServer 8000) 
+* Run local server I prefer running 
+
+```javascript
+  python -m SimpleHTTPServer 8000
+```
 
 * Launch index.html
 
