@@ -4,17 +4,13 @@
   "description": "An Angular Application",
   "main": "index.js",
   "dependencies": {
-    "angular": "~1.5.8",
-    "bootstrap": "~3.3.7",
-    "route": "~0.2.5",
-    "underscore": "~1.8.3",
-    "jquery": "~3.1.1",
-    "angular-route": "~1.5.8"
+    "express": "4.12.3",
+    "express-session": "1.11.2"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
-  "author": "",
-  "license": "BSD-2-Clause"
+  "author": "divyanshu-rawat",
+  "license": "MIT"
 }
