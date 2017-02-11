@@ -1,23 +1,17 @@
 angular.module('groceryListApp', ["ngRoute"])
 
 
-.constant('_',
-    window._
-)
+.constant('_', window._ )
 
 .controller("HomeController", ["$scope","GroceryService", function($scope,GroceryService) {
     $scope.appTitle = "Grocery List";
 
     $scope.groceryItems = GroceryService.grocery_items;
-
        $scope.removeItem = function (entry) {
-        console.log(entry);
-
+        // console.log(entry);
         GroceryService.remove_item(entry);
 
-
     }
-
 
     $scope.markCompleted = function (entry) {
 
@@ -30,7 +24,7 @@ angular.module('groceryListApp', ["ngRoute"])
 
 .service('GroceryService', [function ($http) {
 
-    var grocery_service = [];
+    var grocery_service = {};
 
     grocery_service.grocery_items = [
         
@@ -39,14 +33,26 @@ angular.module('groceryListApp', ["ngRoute"])
     grocery_service.save = function (entry) {
 
         entry.id = grocery_service.generate_id();
+
+        console.log('id please !' + entry.id);
         grocery_service.grocery_items.push(entry);
     }
 
     grocery_service.generate_id = function () {
 
-            var maxId = _.max(grocery_service.grocery_items,function (entry) { return entry.id }) ;
-            maxId.id = maxId.id + 1;
-            return maxId.id;
+        var maxId = 0;
+
+        if(_.isEmpty(grocery_service.grocery_items)==true)
+            maxId = maxId + 1;
+        else
+        {
+            var maxId = _.max(grocery_service.grocery_items,function (entry) { 
+                 return entry.id; 
+             }) ;
+            maxId = maxId.id + 1;
+        }
+        
+        return maxId;
 
     }
 
@@ -116,13 +122,11 @@ angular.module('groceryListApp', ["ngRoute"])
 .controller("GroceryListItemController", ["$scope","$routeParams","$location","GroceryService",function($scope,$routeParams,$location,GroceryService){
 
   
-    $scope.groceryItem = { id: 0 ,completed: true, itemName: '', date: new Date()};
+    $scope.groceryItem = { id: 0 ,completed: false, itemName: '', date: new Date()};
     $scope.save = function () {
 
         if($routeParams.id)
         {
-             console.log($routeParams.id);
-
              GroceryService.edit($routeParams.id,$scope.groceryItem.itemName);
         } 
         else
@@ -134,14 +138,9 @@ angular.module('groceryListApp', ["ngRoute"])
 
         }
 
-         $location.path("/")
+         $location.path("/");
 
     }
-
- 
-      
-     // console.log(grocery_service.generate_id);
-
 }])
 
 .config(function($routeProvider) {
